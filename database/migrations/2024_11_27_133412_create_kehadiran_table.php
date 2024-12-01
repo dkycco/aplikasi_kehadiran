@@ -21,6 +21,8 @@ return new class extends Migration
             $table->time('waktu_keluar');
             $table->time('waktu_masuk_aktual');
             $table->time('waktu_keluar_aktual');
+            $table->string('alasan_singkat');
+            $table->string('file');
             $table->timestamps();
         });
     }

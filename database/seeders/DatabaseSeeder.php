@@ -70,7 +70,7 @@ class DatabaseSeeder extends Seeder
             'nama' => 'IF III A',
             'fakultas_id' => '1',
             'prodi_id' => '1',
-            'tingkat' => '1',
+            'tingkat' => 'I',
         ]);
 
         Mahasiswa::create([
