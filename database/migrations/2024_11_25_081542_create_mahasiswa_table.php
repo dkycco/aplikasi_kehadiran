@@ -13,15 +13,39 @@ class CreateMahasiswaTable extends Migration
      */
     public function up()
     {
+        Schema::create('fakultas', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->string('singkat');
+            $table->timestamps();
+        });
+
+        Schema::create('prodi', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->string('singkat');
+            $table->timestamps();
+        });
+
+        Schema::create('kelas', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->foreignId('fakultas_id')->constrained('fakultas');
+            $table->foreignId('prodi_id')->constrained('prodi');
+            $table->string('tingkat');
+            $table->timestamps();
+        });
+
         Schema::create('mahasiswa', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Nama mahasiswa
-            $table->string('email')->unique(); // Email mahasiswa
-            $table->timestamp('email_verified_at')->nullable(); // Verifikasi email
-            $table->string('password'); // Password mahasiswa
-            $table->string('nim')->unique(); // NIM mahasiswa (opsional)
-            $table->rememberToken(); // Token untuk fitur remember me
-            $table->timestamps(); // Timestamps created_at & updated_at
+            $table->foreignId('user_id')->constrained('users');
+            $table->string('nim')->unique();
+            $table->string('tmp_lahir');
+            $table->date('tgl_lahir');
+            $table->foreignId('fakultas_id')->constrained('fakultas');
+            $table->foreignId('prodi_id')->constrained('prodi');
+            $table->foreignId('kelas_id')->constrained('kelas');
+            $table->timestamps();
         });
     }
 
@@ -32,6 +56,9 @@ class CreateMahasiswaTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('fakultas');
+        Schema::dropIfExists('prodi');
+        Schema::dropIfExists('kelas');
         Schema::dropIfExists('mahasiswa');
     }
 }

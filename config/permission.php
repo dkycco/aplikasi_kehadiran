@@ -3,8 +3,7 @@
 return [
 
     'guards' => [
-        'web',
-        'mahasiswa',
+        'web'
     ],
 
     'models' => [
@@ -32,8 +31,7 @@ return [
         'role' => Spatie\Permission\Models\Role::class,
 
         'user' => [
-            'admin_dosen' => App\Models\User::class,
-            'mahasiswa' => App\Models\Mahasiswa::class,
+            'admin_dosen' => App\Models\User::class
         ],
 
     ],
